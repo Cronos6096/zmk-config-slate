@@ -1,0 +1,5 @@
+config SHIELD_SLATE
+    def_bool $(shields_list_contains,slate_sinistra)
+
+config SHIELD_SLATE
+    def_bool $(shields_list_contains,slate_destra)

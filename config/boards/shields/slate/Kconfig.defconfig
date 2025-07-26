@@ -1,0 +1,16 @@
+if SHIELD_SLATE_SINISTRA
+
+config ZMK_KEYBOARD_NAME
+    default "Slate"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif
+
+if SHIELD_SLATE_SINISTRA || SHIELD_SLATE_DESTRA
+
+config ZMK_SPLIT
+    default y
+
+endif
