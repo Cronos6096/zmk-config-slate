@@ -5,6 +5,7 @@
 / {
     keymap {
         compatible = "zmk,keymap";
+        label = "Km";
 
         default_layer {
             bindings = <
