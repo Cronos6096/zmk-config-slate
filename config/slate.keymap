@@ -22,7 +22,7 @@
 &kp ESCAPE      &trans       &trans  &trans  &trans  &trans                                                             &trans         &trans   &trans    &trans     &trans    &kp DEL
 &kp TAB         &trans      &kp W   &kp E   &kp R   &kp T   &kp GRAVE                                       &trans      &kp Y          &kp U    &kp I     &kp O      &kp LBKT  &kp PIPE
 &bt BT_PRV      &bt BT_CLR  &kp S   &kp D   &kp F   &kp G   &kp LPAR                                        &kp COMMA   &kp LEFT       &kp UP   &kp DOWN  &kp RIGHT  &kp APOS  &kp RALT
-                &bt BT_NXT  &kp X   &kp C   &kp V   &kp B   &kp LCTRL &kp SPACE &kp RET  &kp BSPC   &none  &kp LALT     &kp N          &kp M    &kp COMMA &kp PERIOD &kp MINUS
+                &bt BT_NXT  &kp X   &kp C   &kp V   &kp B   &kp LCTRL &kp SPACE &kp RET  &kp BSPC   &trans  &kp LALT     &kp N          &kp M    &kp COMMA &kp PERIOD &kp MINUS
                                                                                 &kp LGUI &kp RSHIFT
             >;
         };
