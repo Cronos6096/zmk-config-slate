@@ -1,7 +1,7 @@
 #include "tastiera.dtsi"
 
 &default_transform {
-    col-offset = <9>;
+    col-offset = <8>;
 };
 
 &kscan0 {

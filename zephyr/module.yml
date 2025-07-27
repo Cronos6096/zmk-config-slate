@@ -1,3 +1,4 @@
+name: slate
 build:
   settings:
     board_root: .
