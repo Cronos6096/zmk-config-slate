@@ -5,11 +5,11 @@
 / {
     keymap {
         compatible = "zmk,keymap";
-        label = "KM";  /* short label avoids the “name too long” error */
+        label = "Slate";
 
         default_layer {
             bindings = <
-              &none    &kp GRV  &kp N1   &kp N2   &kp N3   &kp N4   &kp N5  
+              &none    &kp GRAVE  &kp N1   &kp N2   &kp N3   &kp N4   &kp N5  
               &none    &none    &none    &none    &none    &none    &kp N6  
               &kp N7   &kp N8   &kp N9   &kp N0   &none
 
@@ -25,35 +25,30 @@
               &kp M    &kp COMM &kp DOT  &kp SLSH &kp MINUS&kp EQUAL&kp BSPC
               &kp LALT &kp LSHF &kp RALT &kp RCTL
 
-              /* cols 0–7 */ &none &none &none &none &none &none &none &none
-              /* cols 8–9 */ &kp SPC &kp ENT
-              /* cols 10–17*/ &none &none &none &none &none &none &none &none
+              &none &none &none &none &none &none &none &none
+              &kp SPC &kp ENT
+              &none &none &none &none &none &none &none &none
             >;
         };
 
         lower_layer {
             bindings = <
-            /* row 0 */
               &none    &trans   &trans   &trans   &trans   &trans   &trans  
               &none    &none    &none    &none    &none    &none    &trans  
               &trans   &trans   &trans   &none
 
-            /* row 1 */
               &trans   &kp 1    &kp 2    &kp 3    &kp 4    &kp 5    &kp 6  
               &none    &none    &none    &none    &kp 7    &kp 8    &kp 9  
               &kp 0    &kp LBKT &kp RBKT &kp BSLS
 
-            /* row 2 */
               &trans   &trans   &trans   &trans   &trans   &trans   &trans  
               &none    &none    &none    &none    &trans   &trans   &trans  
               &trans   &trans   &trans   &none
 
-            /* row 3 */
               &trans   &trans   &trans   &trans   &trans   &trans   &trans  
               &trans   &trans   &trans   &trans   &trans   &trans   &trans  
-              &trans   &MO(2)   &trans   &none   /* MO(2)=Adjust layer */
+              &trans   &MO(2)   &trans   &none
 
-            /* row 4 */
               &none    &none    &none    &none    &none    &none    &none    &none
               &trans   &trans   &none    &none    &none    &none    &none    &none
             >;
