@@ -8,20 +8,11 @@
 
         default_layer {
             bindings = <
-                  &none   &kp N1   &kp N2   &kp N3   &kp N4   &kp N5   &none  &none       &none       &kp N7   &kp N8   &kp N9   &kp N0   &trans    &none &none
-                  &trans  &kp ESC  &kp Q    &kp W    &kp E    &kp R    &kp T  &none       &none       &kp Y    &kp U    &kp I    &kp O    &kp P     &kp BKSP &trans
-                  &trans  &kp TAB  &kp A    &kp S    &kp D    &kp F    &kp G  &kp LAT     &kp RALT    &kp H    &kp J    &kp K    &kp L    &kp SCLN  &kp RET &trans
-                  &trans  &kp LSHFT&kp Z    &kp X    &kp C    &kp V    &kp B  &kp THUMB1  &kp THUMB2  &kp N    &kp M    &kp COMMA &kp DOT &kp SLSH  &bt BT_CLR &trans
-            >;
-        };
-
-        lower_layer {
-            bindings = <
-                  &none       &trans       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4  &trans      &trans       &trans      &trans      &trans      &bt BT_CLR  &trans      &trans      &none
-                  &none       &trans       &trans      &trans      &trans      &trans      &trans     &trans      &trans       &trans      &trans      &trans      &trans      &trans      &trans      &none
-                  &none       &trans       &trans      &kp LPAR    &kp RPAR    &trans      &trans     &kp LBKT    &kp RBKT     &kp MINUS   &kp EQUAL   &trans      &trans      &trans      &trans      &none
-                  &none       &trans       &trans      &trans      &trans      &trans      &trans     &trans      &trans       &trans      &trans      &trans      &trans      &trans      &trans      &none
-            >;
+        &none    &kp GRV &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &none    &none    &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp BSPC &none
+        &none    &kp ESC &kp Q   &kp W   &kp E   &kp R   &kp T   &kp LALT &kp LALT &kp Y   &kp U   &kp I   &kp O   &kp P   &kp BKSP &none
+        &none    &kp TAB &kp A   &kp S   &kp D   &kp F   &kp G   &none    &none    &kp H   &kp J   &kp K   &kp L   &kp SCLN&kp RET  &none
+        &kp TH0  &kp LSHF&kp Z   &kp X   &kp C   &kp V   &kp B   &kp TH1  &kp TH2  &kp N   &kp M   &kp COMMA&kp DOT &kp SLSH&bt BT_CLR&none
+      >;
         };
     };
 };
