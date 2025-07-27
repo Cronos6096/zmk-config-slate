@@ -22,11 +22,11 @@
               &kp A &kp A &kp RET  &none
 
               &kp A &kp Z    &kp X    &kp C    &kp V    &kp B    &kp N  
-              &kp M    &kp , &kp .  &kp A &kp - &kp = &kp BSPC
+              &kp M    &kp A &kp A  &kp A &kp A &kp A &kp A
               &kp A &kp LSHF &kp RALT &kp A
 
               &none &none &none &none &none &none &none &none
-              &kp SPC &kp ENT
+              &kp SPACE &kp ENT
               &none &none &none &none &none &none &none &none
             >;
         };
@@ -39,7 +39,7 @@
 
               &trans   &kp 1    &kp 2    &kp 3    &kp 4    &kp 5    &kp 6  
               &none    &none    &none    &none    &kp 7    &kp 8    &kp 9  
-              &kp 0    &kp LBKT &kp RBKT &kp BSLS
+              &kp 0    &kp LBKT &kp RBKT &kp PIPE
 
               &trans   &trans   &trans   &trans   &trans   &trans   &trans  
               &none    &none    &none    &none    &trans   &trans   &trans  
@@ -47,7 +47,7 @@
 
               &trans   &trans   &trans   &trans   &trans   &trans   &trans  
               &trans   &trans   &trans   &trans   &trans   &trans   &trans  
-              &trans   &MO(2)   &trans   &none
+              &trans   &trans   &trans   &none
 
               &none    &none    &none    &none    &none    &none    &none    &none
               &trans   &trans   &none    &none    &none    &none    &none    &none
@@ -62,7 +62,7 @@
 
               &trans   &F1      &F2      &F3      &F4      &F5      &F6  
               &none    &none    &none    &none    &F7      &F8      &F9  
-              &F10     &F11     &F12     &KP(DEL)
+              &F10     &F11     &F12     &trans
 
               &trans   &trans   &trans   &trans   &trans   &trans   &trans  
               &none    &none    &none    &none    &trans   &trans   &trans  
@@ -79,15 +79,15 @@
 
         adjust_layer {
             bindings = <
-              &none    &RESET   &EEP_RST &LOCK    &trans   &trans   &trans  
+              &none    &BOOTLOADER &trans &trans    &trans   &trans   &trans  
               &none    &none    &none    &none    &none    &none    &none  
               &none    &none    &none    &none
 
-              &trans   &RGB_TOG &RGB_HUI &RGB_SAI &RGB_VAI &RGB_MOD &RGB_RMOD
+              &trans   &trans &trans &trans &trans &trans &trans
               &none    &none    &none    &none    &none    &none    &none  
               &none    &none    &none    &none
 
-              &trans   &RGB_SPI &RGB_HUD &RGB_SAD &RGB_VAD &trans   &trans  
+              &trans   &trans &trans &trans &trans &trans &trans &trans
               &none    &none    &none    &none    &none    &none    &none  
               &none    &none    &none    &none
 
