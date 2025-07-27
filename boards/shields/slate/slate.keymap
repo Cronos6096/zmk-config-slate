@@ -5,16 +5,104 @@
 / {
     keymap {
         compatible = "zmk,keymap";
-        label = "Km";
+        label = "KM";  /* short label avoids the “name too long” error */
 
         default_layer {
             bindings = <
-        &none    &kp GRV &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &none    &none    &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp BSPC &none
-        &none    &kp ESC &kp Q   &kp W   &kp E   &kp R   &kp T   &kp LALT &kp LALT &kp Y   &kp U   &kp I   &kp O   &kp P   &kp BKSP &none
-        &none    &kp TAB &kp A   &kp S   &kp D   &kp F   &kp G   &none    &none    &kp H   &kp J   &kp K   &kp L   &kp SCLN&kp RET  &none
-        &kp TH0  &kp LSHF&kp Z   &kp X   &kp C   &kp V   &kp B   &kp TH1  &kp TH2  &kp N   &kp M   &kp COMMA&kp DOT &kp SLSH&bt BT_CLR&none
-      >;
+              &none    &kp GRV  &kp N1   &kp N2   &kp N3   &kp N4   &kp N5  
+              &none    &none    &none    &none    &none    &none    &kp N6  
+              &kp N7   &kp N8   &kp N9   &kp N0   &none
+
+              &kp ESC  &kp Q    &kp W    &kp E    &kp R    &kp T    &kp Y  
+              &none    &none    &none    &none    &kp U    &kp I    &kp O  
+              &kp P    &kp LBKT &kp RBKT &kp BSLS
+
+              &kp TAB  &kp A    &kp S    &kp D    &kp F    &kp G    &kp H  
+              &none    &none    &none    &none    &kp J    &kp K    &kp L  
+              &kp SCLN &kp QUOT &kp RET  &none
+
+              &kp LCTL &kp Z    &kp X    &kp C    &kp V    &kp B    &kp N  
+              &kp M    &kp COMM &kp DOT  &kp SLSH &kp MINUS&kp EQUAL&kp BSPC
+              &kp LALT &kp LSHF &kp RALT &kp RCTL
+
+              /* cols 0–7 */ &none &none &none &none &none &none &none &none
+              /* cols 8–9 */ &kp SPC &kp ENT
+              /* cols 10–17*/ &none &none &none &none &none &none &none &none
+            >;
+        };
+
+        lower_layer {
+            bindings = <
+            /* row 0 */
+              &none    &trans   &trans   &trans   &trans   &trans   &trans  
+              &none    &none    &none    &none    &none    &none    &trans  
+              &trans   &trans   &trans   &none
+
+            /* row 1 */
+              &trans   &kp 1    &kp 2    &kp 3    &kp 4    &kp 5    &kp 6  
+              &none    &none    &none    &none    &kp 7    &kp 8    &kp 9  
+              &kp 0    &kp LBKT &kp RBKT &kp BSLS
+
+            /* row 2 */
+              &trans   &trans   &trans   &trans   &trans   &trans   &trans  
+              &none    &none    &none    &none    &trans   &trans   &trans  
+              &trans   &trans   &trans   &none
+
+            /* row 3 */
+              &trans   &trans   &trans   &trans   &trans   &trans   &trans  
+              &trans   &trans   &trans   &trans   &trans   &trans   &trans  
+              &trans   &MO(2)   &trans   &none   /* MO(2)=Adjust layer */
+
+            /* row 4 */
+              &none    &none    &none    &none    &none    &none    &none    &none
+              &trans   &trans   &none    &none    &none    &none    &none    &none
+            >;
+        };
+
+        raise_layer {
+            bindings = <
+              &none    &trans   &trans   &trans   &trans   &trans   &trans  
+              &none    &none    &none    &none    &trans   &trans   &trans  
+              &trans   &trans   &trans   &none
+
+              &trans   &F1      &F2      &F3      &F4      &F5      &F6  
+              &none    &none    &none    &none    &F7      &F8      &F9  
+              &F10     &F11     &F12     &KP(DEL)
+
+              &trans   &trans   &trans   &trans   &trans   &trans   &trans  
+              &none    &none    &none    &none    &trans   &trans   &trans  
+              &trans   &trans   &trans   &none
+
+              &trans   &trans   &trans   &trans   &trans   &trans   &trans  
+              &trans   &trans   &trans   &trans   &trans   &trans   &trans  
+              &trans   &trans   &trans   &none
+
+              &none    &none    &none    &none    &none    &none    &none    &none
+              &trans   &trans   &none    &none    &none    &none    &none    &none
+            >;
+        };
+
+        adjust_layer {
+            bindings = <
+              &none    &RESET   &EEP_RST &LOCK    &trans   &trans   &trans  
+              &none    &none    &none    &none    &none    &none    &none  
+              &none    &none    &none    &none
+
+              &trans   &RGB_TOG &RGB_HUI &RGB_SAI &RGB_VAI &RGB_MOD &RGB_RMOD
+              &none    &none    &none    &none    &none    &none    &none  
+              &none    &none    &none    &none
+
+              &trans   &RGB_SPI &RGB_HUD &RGB_SAD &RGB_VAD &trans   &trans  
+              &none    &none    &none    &none    &none    &none    &none  
+              &none    &none    &none    &none
+
+              &trans   &trans   &trans   &trans   &trans   &trans   &trans  
+              &trans   &trans   &trans   &trans   &trans   &trans   &trans  
+              &trans   &trans   &trans   &none
+
+              &none    &none    &none    &none    &none    &none    &none    &none
+              &trans   &trans   &none    &none    &none    &none    &none    &none
+            >;
         };
     };
 };
-
