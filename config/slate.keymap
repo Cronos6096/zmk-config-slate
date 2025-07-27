@@ -10,7 +10,7 @@
         default_layer {
             bindings = <
            &kp N1  &kp N2  &kp N3  &kp N4  &kp N5                                                            &kp N6   &kp N7   &kp N8    &kp N9     &kp N0
-&kp ESCAPE &kp Q   &kp W   &kp E   &kp R   &kp t   &kp GRAVE                                       &kp EQUAL &kp Y    &kp U    &kp I     &kp O      &kp LBKT  &kp DEL
+&kp ESCAPE &kp Q   &kp W   &kp E   &kp R   &kp T   &kp GRAVE                                       &kp EQUAL &kp Y    &kp U    &kp I     &kp O      &kp LBKT  &kp DEL
 &kp TAB    &kp A   &kp S   &kp D   &kp F   &kp G   &kp LPAR                                        &kp COMMA &kp H    &kp J    &kp K     &kp L      &kp APOS  &kp PIPE
 &kp LSHIFT &kp Z   &kp X   &kp C   &kp V   &kp B   &kp LCTRL &kp SPACE &kp RET  &kp BSCP   &mo 1   &kp LALT  &kp N    &kp M    &kp COMMA &kp PERIOD &kp MINUS &kp RALT
                                                                        &kp LGUI &kp RSHIFT
@@ -20,7 +20,7 @@
         lower_layer {
             bindings = <
                 &trans       &trans  &trans  &trans  &trans                                                              &trans         &trans   &trans    &trans     &trans
-&kp ESCAPE      &trans      &kp W   &kp E   &kp R   &kp t   &kp GRAVE                                       &trans      &kp Y          &kp U    &kp I     &kp O      &kp LBKT  &kp DEL
+&kp ESCAPE      &trans      &kp W   &kp E   &kp R   &kp T   &kp GRAVE                                       &trans      &kp Y          &kp U    &kp I     &kp O      &kp LBKT  &kp DEL
 &kp TAB         &bt BT_CLR  &kp S   &kp D   &kp F   &kp G   &kp LPAR                                        &kp COMMA   &kp LEFT       &kp UP   &kp DOWN  &kp RIGHT  &kp APOS  &kp PIPE
 &bt BT_PRV      &bt BT_NXT  &kp X   &kp C   &kp V   &kp B   &kp LCTRL &kp SPACE &kp RET  &kp BSCP   &none  &kp LALT     &kp N          &kp M    &kp COMMA &kp PERIOD &kp MINUS &kp RALT
                                                                                 &kp LGUI &kp RSHIFT
