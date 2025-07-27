@@ -1,4 +1,4 @@
-#include "tastiera.dtsi"
+#include "slate.dtsi"
 
 &kscan0 {
     col-gpios

@@ -1,4 +1,4 @@
-#include "tastiera.dtsi"
+#include "slate.dtsi"
 
 &default_transform {
     col-offset = <8>;
