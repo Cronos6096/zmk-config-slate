@@ -4,3 +4,6 @@ include:
 
   - board: nice_nano_v2
     shield: slate_destra
+
+  - board: nice_nano_v2
+    shield: settings_reset
