@@ -1,0 +1,9 @@
+manifest:
+  name: slate
+  type: module
+  version: 0.1.0
+
+build:
+  cmake: module.cmake
+  settings:
+    board_root: .
