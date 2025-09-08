@@ -10,7 +10,7 @@
         default_layer {
             bindings = <
 &kp ESCAPE &kp N1  &kp N2  &kp N3  &kp N4  &kp N5                                                            &kp N6   &kp N7   &kp N8    &kp N9     &kp N0    &kp DEL
-&kp TAB    &bt Q   &kp W   &kp E   &kp R   &kp T   &kp GRAVE                                       &kp EQUAL &kp Y    &kp U    &kp I     &kp O      &kp LBKT  &kp PIPE
+&kp TAB    &kp Q   &kp W   &kp E   &kp R   &kp T   &kp GRAVE                                       &kp EQUAL &kp Y    &kp U    &kp I     &kp O      &kp LBKT  &kp PIPE
 &kp LSHIFT &kp A   &kp S   &kp D   &kp F   &kp G   &kp LPAR                                        &kp COMMA &kp H    &kp J    &kp K     &kp L      &kp APOS  &kp RALT
            &kp Z   &kp X   &kp C   &kp V   &kp B   &kp LCTRL &kp SPACE &kp RET  &kp BSPC   &mo 1   &kp LALT  &kp N    &kp M    &kp COMMA &kp PERIOD &kp MINUS
                                                                        &kp LGUI &kp RSHIFT
