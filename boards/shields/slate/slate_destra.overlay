@@ -1,7 +1,7 @@
 #include "slate.dtsi"
 
 &default_transform {
-    col-offset = <7>;
+    col-offset = <9>;
 };
 
 &kscan0 {
