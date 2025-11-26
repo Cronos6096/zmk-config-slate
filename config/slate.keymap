@@ -6,6 +6,10 @@
 #define lower_layer   1
 #define keypad_layer  2
 
+&mt {
+    tapping-term-ms = 300>;
+};
+
 / {
     keymap {
         compatible = "zmk,keymap";
