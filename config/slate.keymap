@@ -24,9 +24,9 @@
 
         lower_layer {
             bindings = <
-&trans          &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp SQT                                             &trans    &kp F6    &kp F7         &kp F8       &kp F9     &kp F10    &trans
+&bt BT_NXT      &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp SQT                                             &trans    &kp F6    &kp F7         &kp F8       &kp F9     &kp F10    &trans
 &bt BT_CLR_ALL  &trans  &trans  &trans  &trans  &trans  &kp LPAR                                            &kp RPAR  &kp HOME  &kp PAGE_DOWN  &kp PAGE_UP  &kp END    &trans     &kp BSLH
-&trans          &trans  &trans  &trans  &trans  &trans  &trans                                              &trans    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &trans     &kp RCTRL
+&bt BT_PRV      &trans  &trans  &trans  &trans  &trans  &trans                                              &trans    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &trans     &kp RCTRL
                 &trans  &trans  &trans  &trans  &trans            &kp SPACE  &kp LGUI  &kp ENTER  &kp BSPC            &trans    &trans         &trans       &kp EQUAL  &kp MINUS
                                                                              &trans    &kp LCTRL
             >;
