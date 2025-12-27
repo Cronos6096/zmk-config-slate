@@ -14,9 +14,9 @@
 
         default_layer {
             bindings = <
-&kp ESCAPE  &mt N1 EXCL  &mt N2 AT  &mt N3 HASH  &mt N4 DOLLAR  &mt N5 PERCENT  &kp APOS                                                                  &sl 2     &mt N6 CARET  &mt N7 AMPS  &mt N8 STAR  &mt N9 LPAR  &mt N0 RPAR   &kp DEL
+&kp ESCAPE  &mt N1 EXCL  &mt N2 AT  &mt N3 HASH  &mt N4 DOLLAR  &mt N5 PERCENT  &kp DQT                                                                   &sl 2     &mt N6 CARET  &mt N7 AMPS  &mt N8 STAR  &mt N9 LPAR  &mt N0 RPAR   &kp DEL
 &kp TAB     &kp Q        &kp W      &kp E        &kp R          &kp T           &kp LBKT                                                                  &kp RBKT  &kp Y         &kp U        &kp I        &kp O        &kp LEFT_ALT  &kp GRAVE
-&kp LSHIFT  &kp A        &kp S      &kp D        &mt LGUI F     &kp G           &kt LALT                                                                  &mo 2     &kp H         &kp J        &kp K        &kp L        &kp P         &kp FSLH
+&kp LSHIFT  &kp A        &kp S      &kp D        &kp F          &kp G           &kt LALT                                                                  &mo 2     &kp H         &kp J        &kp K        &kp L        &kp P         &kp FSLH
             &kp Z        &kp X      &kp C        &kp V          &kp B                     &kp SPACE  &kp LGUI   &mt LC(BACKSPACE) BACKSPACE  &lt 1 ENTER            &kp N         &kp M        &kp COMMA    &kp PERIOD   &kp SEMI
                                                                                                      &kp LCTRL  &kp LCTRL
             >;
@@ -24,10 +24,10 @@
 
         lower_layer {
             bindings = <
-&trans          &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp SQT                                             &trans    &kp F6    &kp F7    &kp F8  &kp F9     &kp F10    &trans
-&bt BT_CLR_ALL  &trans  &trans  &trans  &trans  &trans  &kp LPAR                                            &kp RPAR  &trans    &trans    &trans  &trans     &trans     &kp BSLH
-&trans          &trans  &trans  &trans  &trans  &trans  &trans                                              &trans    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans     &kp RCTRL
-                &trans  &trans  &trans  &trans  &trans            &kp SPACE  &kp LGUI  &kp ENTER  &kp BSPC            &trans    &trans    &trans  &kp EQUAL  &kp MINUS
+&trans          &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp SQT                                             &trans    &kp F6    &kp F7         &kp F8       &kp F9     &kp F10    &trans
+&bt BT_CLR_ALL  &trans  &trans  &trans  &trans  &trans  &kp LPAR                                            &kp RPAR  &kp HOME  &kp PAGE_DOWN  &kp PAGE_UP  &kp END    &trans     &kp BSLH
+&trans          &trans  &trans  &trans  &trans  &trans  &trans                                              &trans    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &trans     &kp RCTRL
+                &trans  &trans  &trans  &trans  &trans            &kp SPACE  &kp LGUI  &kp ENTER  &kp BSPC            &trans    &trans         &trans       &kp EQUAL  &kp MINUS
                                                                              &trans    &kp LCTRL
             >;
         };
