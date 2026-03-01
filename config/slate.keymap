@@ -26,7 +26,7 @@
             bindings = <
 &bt BT_NXT  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp DQT                                            &trans    &kp F6    &kp F7         &kp F8       &kp F9     &kp F10  &bt BT_CLR
 &trans      &trans  &trans  &trans  &trans  &trans  &kp LPAR                                           &kp RPAR  &kp HOME  &kp PAGE_DOWN  &kp PAGE_UP  &kp END    &trans   &kp BSLH
-&trans      &trans  &trans  &trans  &trans  &trans  &trans                                             &trans    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &trans   &kp PIPE
+&bt BT_PRV  &trans  &trans  &trans  &trans  &trans  &trans                                             &trans    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &trans   &kp PIPE
             &trans  &trans  &trans  &trans  &trans            &trans  &kp LALT  &kp BACKSPACE  &trans            &trans    &trans         &trans       &trans     &trans
                                                                       &trans    &trans
             >;
