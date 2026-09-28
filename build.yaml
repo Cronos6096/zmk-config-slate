@@ -1,5 +1,7 @@
 include:
-  - board: nice_nano_v2
+  # The central is an AliExpress nRF52840 dongle: its stock bootloader speaks
+  # Nordic Open DFU, not UF2, so CI has to ship the HEX image.
+  - board: nrf52840dongle_nrf52840
     shield: slate_dongle
     artifact-name: slate-dongle
     snippet: studio-rpc-usb-uart
@@ -8,6 +10,9 @@ include:
       -DCONFIG_BT_MAX_CONN=5
       -DCONFIG_BT_MAX_PAIRED=5
       -DCONFIG_ZMK_SLEEP=n
+      -DCONFIG_BUILD_OUTPUT_HEX=y
+      -DCONFIG_BUILD_OUTPUT_UF2=n
+      -DCONFIG_FLASH_LOAD_SIZE=0xDB000
 
   - board: nice_nano_v2
     shield: slate_sinistra
@@ -16,3 +21,18 @@ include:
   - board: nice_nano_v2
     shield: slate_destra
     artifact-name: slate-right
+
+  # Settings reset firmware: clears the BLE settings/bond storage on the halves
+  # (see https://zmk.dev/docs/troubleshooting/connection-issues#split-keyboard-parts-unable-to-pair).
+  # It disables BLE so the parts do not re-pair until the normal image is flashed.
+  - board: nice_nano_v2
+    shield: settings_reset
+    artifact-name: slate-settings-reset
+
+  - board: nrf52840dongle_nrf52840
+    shield: settings_reset
+    artifact-name: slate-dongle-settings-reset
+    cmake-args: >-
+      -DCONFIG_BUILD_OUTPUT_HEX=y
+      -DCONFIG_BUILD_OUTPUT_UF2=n
+      -DCONFIG_FLASH_LOAD_SIZE=0xDB000

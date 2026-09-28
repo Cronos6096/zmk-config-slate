@@ -4,3 +4,7 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.2
+    with:
+      # The dongle central has no UF2 bootloader, so upload its HEX instead.
+      # The nice!nano halves still produce zmk.uf2 and are unaffected.
+      fallback_binary: hex

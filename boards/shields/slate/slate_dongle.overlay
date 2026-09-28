@@ -1,8 +1,12 @@
-#include "slate.dtsi"
+// The central is an nRF52840 dongle, not a pro micro: slate.dtsi cannot be
+// included here because its kscan0 references &pro_micro. Only the layout is
+// needed, and it provides both the physical layout and its matrix transform.
+#include "slate-layouts.dtsi"
 
 / {
     chosen {
         zmk,kscan = &mock_kscan;
+        zmk,physical-layout = &slate_layout;
     };
 
     mock_kscan: mock_kscan_0 {
@@ -12,8 +16,4 @@
 
         events = <>;
     };
-};
-
-&kscan0 {
-    status = "disabled";
 };

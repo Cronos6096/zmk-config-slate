@@ -1,0 +1,455 @@
+diff -ruN a/nordicsemi/dfu/dfu_transport_ant.py b/nordicsemi/dfu/dfu_transport_ant.py
+--- a/nordicsemi/dfu/dfu_transport_ant.py
++++ b/nordicsemi/dfu/dfu_transport_ant.py
+@@ -187,7 +187,7 @@
+         logger.log(TRANSPORT_LOGGING_LEVEL, "ANT: --> {}".format(req))
+ 
+         self.tx_seq = (self.tx_seq + 1) & 0xFF
+-        data = map(ord, struct.pack('<HB', len(req) + 3, self.tx_seq)) + req
++        data = list(struct.pack('<HB', len(req) + 3, self.tx_seq)) + req
+ 
+         self.tx_result = None
+ 
+@@ -461,7 +461,7 @@
+     def __set_prn(self):
+         logger.debug("ANT: Set Packet Receipt Notification {}".format(self.prn))
+         self.dfu_adapter.send_message([DfuTransportAnt.OP_CODE['SetPRN']]
+-            + map(ord, struct.pack('<H', self.prn)))
++            + list(struct.pack('<H', self.prn)))
+         self.__get_response(DfuTransportAnt.OP_CODE['SetPRN'])
+ 
+     def __get_mtu(self):
+@@ -506,7 +506,7 @@
+ 
+     def __create_object(self, object_type, size):
+         self.dfu_adapter.send_message([DfuTransportAnt.OP_CODE['CreateObject'], object_type]\
+-                                            + map(ord, struct.pack('<L', size)))
++                                            + list(struct.pack('<L', size)))
+         self.__get_response(DfuTransportAnt.OP_CODE['CreateObject'])
+ 
+     def __calculate_checksum(self):
+@@ -563,7 +563,7 @@
+             to_transmit = data[i:i + self.mtu - 4 ]
+             to_transmit = struct.pack('B',DfuTransportAnt.OP_CODE['WriteObject']) + to_transmit
+ 
+-            self.dfu_adapter.send_message(map(ord, to_transmit))
++            self.dfu_adapter.send_message(list(to_transmit))
+             crc     = binascii.crc32(to_transmit[1:], crc) & 0xFFFFFFFF
+             offset += len(to_transmit) - 1
+             current_pnr    += 1
+diff -ruN a/nordicsemi/dfu/dfu_transport_ble.py b/nordicsemi/dfu/dfu_transport_ble.py
+--- a/nordicsemi/dfu/dfu_transport_ble.py
++++ b/nordicsemi/dfu/dfu_transport_ble.py
+@@ -560,7 +560,7 @@
+ 
+     def __set_prn(self):
+         logger.debug("BLE: Set Packet Receipt Notification {}".format(self.prn))
+-        self.dfu_adapter.write_control_point([DfuTransportBle.OP_CODE['SetPRN']] + map(ord, struct.pack('<H', self.prn)))
++        self.dfu_adapter.write_control_point([DfuTransportBle.OP_CODE['SetPRN']] + list(struct.pack('<H', self.prn)))
+         self.__get_response(DfuTransportBle.OP_CODE['SetPRN'])
+ 
+     def __create_command(self, size):
+@@ -571,7 +571,7 @@
+ 
+     def __create_object(self, object_type, size):
+         self.dfu_adapter.write_control_point([DfuTransportBle.OP_CODE['CreateObject'], object_type]\
+-                                            + map(ord, struct.pack('<L', size)))
++                                            + list(struct.pack('<L', size)))
+         self.__get_response(DfuTransportBle.OP_CODE['CreateObject'])
+ 
+     def __calculate_checksum(self):
+@@ -619,7 +619,7 @@
+         current_pnr = 0
+         for i in range(0, len(data), self.dfu_adapter.packet_size):
+             to_transmit     = data[i:i + self.dfu_adapter.packet_size]
+-            self.dfu_adapter.write_data_point(map(ord, to_transmit))
++            self.dfu_adapter.write_data_point(list(to_transmit))
+             crc     = binascii.crc32(to_transmit, crc) & 0xFFFFFFFF
+             offset += len(to_transmit)
+             current_pnr    += 1
+diff -ruN a/nordicsemi/dfu/dfu_transport_serial.py b/nordicsemi/dfu/dfu_transport_serial.py
+--- a/nordicsemi/dfu/dfu_transport_serial.py
++++ b/nordicsemi/dfu/dfu_transport_serial.py
+@@ -356,7 +356,7 @@
+     def __set_prn(self):
+         logger.debug("Serial: Set Packet Receipt Notification {}".format(self.prn))
+         self.dfu_adapter.send_message([DfuTransportSerial.OP_CODE['SetPRN']]
+-            + map(ord, struct.pack('<H', self.prn)))
++            + list(struct.pack('<H', self.prn)))
+         self.__get_response(DfuTransportSerial.OP_CODE['SetPRN'])
+ 
+     def __get_mtu(self):
+@@ -401,7 +401,7 @@
+ 
+     def __create_object(self, object_type, size):
+         self.dfu_adapter.send_message([DfuTransportSerial.OP_CODE['CreateObject'], object_type]\
+-                                            + map(ord, struct.pack('<L', size)))
++                                            + list(struct.pack('<L', size)))
+         self.__get_response(DfuTransportSerial.OP_CODE['CreateObject'])
+ 
+     def __calculate_checksum(self):
+@@ -456,14 +456,14 @@
+ 
+         current_pnr     = 0
+ 
+-        for i in range(0, len(data), (self.mtu-1)/2 - 1):
++        for i in range(0, len(data), (self.mtu-1)//2 - 1):
+             # append the write data opcode to the front
+             # here the maximum data size is self.mtu/2,
+             # due to the slip encoding which at maximum doubles the size
+-            to_transmit = data[i:i + (self.mtu-1)/2 - 1 ]
++            to_transmit = data[i:i + (self.mtu-1)//2 - 1 ]
+             to_transmit = struct.pack('B',DfuTransportSerial.OP_CODE['WriteObject']) + to_transmit
+ 
+-            self.dfu_adapter.send_message(map(ord, to_transmit))
++            self.dfu_adapter.send_message(list(to_transmit))
+             crc     = binascii.crc32(to_transmit[1:], crc) & 0xFFFFFFFF
+             offset += len(to_transmit) - 1
+             current_pnr    += 1
+diff -ruN a/nordicsemi/dfu/intelhex/__init__.py b/nordicsemi/dfu/intelhex/__init__.py
+--- a/nordicsemi/dfu/intelhex/__init__.py
++++ b/nordicsemi/dfu/intelhex/__init__.py
+@@ -79,7 +79,7 @@
+         self._offset = 0
+ 
+         if source is not None:
+-            if isinstance(source, basestring) or getattr(source, "read", None):
++            if isinstance(source, str) or getattr(source, "read", None):
+                 # load hex file
+                 self.loadhex(source)
+             elif isinstance(source, dict):
+@@ -134,7 +134,7 @@
+         if record_type == 0:
+             # data record
+             addr += self._offset
+-            for i in xrange(4, 4+record_length):
++            for i in range(4, 4+record_length):
+                 if not self._buf.get(addr, None) is None:
+                     raise AddressOverlapError(address=addr, line=line)
+                 self._buf[addr] = bin[i]
+@@ -345,7 +345,7 @@
+ 
+         start, end = self._get_start_end(start, end, size)
+ 
+-        for i in xrange(start, end+1):
++        for i in range(start, end+1):
+             bin.append(self._buf.get(i, pad))
+ 
+         return bin
+@@ -372,7 +372,7 @@
+         return self._tobinstr_really(start, end, pad, size)
+ 
+     def _tobinstr_really(self, start, end, pad, size):
+-        return asstr(self._tobinarray_really(start, end, pad, size).tostring())
++        return asstr(self._tobinarray_really(start, end, pad, size).tobytes())
+ 
+     def tobinfile(self, fobj, start=None, end=None, pad=_DEPRECATED, size=None):
+         '''Convert to binary and write to file.
+@@ -400,7 +400,7 @@
+         else:
+             close_fd = False
+ 
+-        fobj.write(self._tobinstr_really(start, end, pad, size))
++        fobj.write(self._tobinarray_really(start, end, pad, size).tobytes())
+ 
+         if close_fd:
+             fobj.close()
+@@ -463,7 +463,7 @@
+                 start = addr.start or addresses[0]
+                 stop = addr.stop or (addresses[-1]+1)
+                 step = addr.step or 1
+-                for i in xrange(start, stop, step):
++                for i in range(start, stop, step):
+                     x = self._buf.get(i)
+                     if x is not None:
+                         ih[i] = x
+@@ -500,7 +500,7 @@
+             if stop < 0:
+                 raise TypeError('stop address cannot be negative')
+             j = 0
+-            for i in xrange(start, stop, step):
++            for i in range(start, stop, step):
+                 self._buf[i] = byte[j]
+                 j += 1
+         else:
+@@ -520,7 +520,7 @@
+                 start = addr.start or addresses[0]
+                 stop = addr.stop or (addresses[-1]+1)
+                 step = addr.step or 1
+-                for i in xrange(start, stop, step):
++                for i in range(start, stop, step):
+                     x = self._buf.get(i)
+                     if x is not None:
+                         del self._buf[i]
+@@ -579,7 +579,7 @@
+                 bin[7] = ip & 0x0FF
+                 bin[8] = (-sum(bin)) & 0x0FF    # chksum
+                 fwrite(':' +
+-                       asstr(hexlify(bin.tostring()).translate(table)) +
++                       asstr(hexlify(bin.tobytes()).translate(table)) +
+                        '\n')
+             elif keys == ['EIP']:
+                 # Start Linear Address Record
+@@ -594,7 +594,7 @@
+                 bin[7] = eip & 0x0FF
+                 bin[8] = (-sum(bin)) & 0x0FF    # chksum
+                 fwrite(':' +
+-                       asstr(hexlify(bin.tostring()).translate(table)) +
++                       asstr(hexlify(bin.tobytes()).translate(table)) +
+                        '\n')
+             else:
+                 if fclose:
+@@ -631,7 +631,7 @@
+                     bin[5] = b[1]   # lsb of high_ofs
+                     bin[6] = (-sum(bin)) & 0x0FF    # chksum
+                     fwrite(':' +
+-                           asstr(hexlify(bin.tostring()).translate(table)) +
++                           asstr(hexlify(bin.tobytes()).translate(table)) +
+                            '\n')
+ 
+                 while True:
+@@ -669,7 +669,7 @@
+                     bin[0] = chain_len
+                     bin[4+chain_len] = (-sum(bin)) & 0x0FF    # chksum
+                     fwrite(':' +
+-                           asstr(hexlify(bin.tostring()).translate(table)) +
++                           asstr(hexlify(bin.tobytes()).translate(table)) +
+                            '\n')
+ 
+                     # adjust cur_addr/cur_ix
+@@ -708,18 +708,18 @@
+         be raised. Padding is not used."""
+         a = array('B', asbytes('\0'*length))
+         try:
+-            for i in xrange(length):
++            for i in range(length):
+                 a[i] = self._buf[addr+i]
+         except KeyError:
+             raise NotEnoughDataError(address=addr, length=length)
+-        return asstr(a.tostring())
++        return asstr(a.tobytes())
+ 
+     def puts(self, addr, s):
+         """Put string of bytes at given address. Will overwrite any previous
+         entries.
+         """
+         a = array('B', asbytes(s))
+-        for i in xrange(len(a)):
++        for i in range(len(a)):
+             self._buf[addr+i] = a[i]
+ 
+     def getsz(self, addr):
+@@ -774,7 +774,7 @@
+             maxdigits = max(len(str(endaddr)), 4)
+             templa = '%%0%dX' % maxdigits
+             range16 = range(16)
+-            for i in xrange(startaddr, endaddr, 16):
++            for i in range(startaddr, endaddr, 16):
+                 tofile.write(templa % i)
+                 tofile.write(' ')
+                 s = []
+@@ -943,7 +943,7 @@
+ 
+         start, end = self._get_start_end(start, end, size)
+ 
+-        for addr in xrange(start, end+1):
++        for addr in range(start, end+1):
+             bin.append(self[addr])
+ 
+         return bin
+@@ -1066,7 +1066,7 @@
+         # calculate checksum
+         s = (-sum(bytes)) & 0x0FF
+         bin = array('B', bytes + [s])
+-        return ':' + asstr(hexlify(bin.tostring())).upper()
++        return ':' + asstr(hexlify(bin.tobytes())).upper()
+     _from_bytes = staticmethod(_from_bytes)
+ 
+     def data(offset, bytes):
+diff -ruN a/nordicsemi/dfu/manifest.py b/nordicsemi/dfu/manifest.py
+--- a/nordicsemi/dfu/manifest.py
++++ b/nordicsemi/dfu/manifest.py
+@@ -92,7 +92,7 @@
+             if not isinstance(d, dict):
+                 return d
+ 
+-            return dict((k, remove_none_entries(v)) for k, v in d.iteritems() if v is not None)
++            return dict((k, remove_none_entries(v)) for k, v in d.items() if v is not None)
+ 
+         return json.dumps({'manifest': self.manifest},
+                           default=lambda o: remove_none_entries(o.__dict__),
+diff -ruN a/nordicsemi/dfu/nrfhex.py b/nordicsemi/dfu/nrfhex.py
+--- a/nordicsemi/dfu/nrfhex.py
++++ b/nordicsemi/dfu/nrfhex.py
+@@ -116,7 +116,7 @@
+         if self.address_has_magic_number(potential_magic_number_address):
+             return "s1x0"
+ 
+-        for i in xrange(4):
++        for i in range(4):
+             potential_magic_number_address += nRFHex.info_struct_address_offset
+ 
+             if self.address_has_magic_number(potential_magic_number_address):
+@@ -153,7 +153,7 @@
+ 
+         # Round up to nearest word
+         word_size = 4
+-        number_of_words = (size + (word_size - 1)) / word_size
++        number_of_words = (size + (word_size - 1)) // word_size
+         size = number_of_words * word_size
+ 
+         return size
+diff -ruN a/nordicsemi/dfu/package.py b/nordicsemi/dfu/package.py
+--- a/nordicsemi/dfu/package.py
++++ b/nordicsemi/dfu/package.py
+@@ -400,7 +400,7 @@
+             sd_bin_path = os.path.join(self.work_dir, sd_bin)
+             sd_bin_created = True
+ 
+-        for key, firmware_data in self.firmwares_data.iteritems():
++        for key, firmware_data in self.firmwares_data.items():
+ 
+             # Normalize the firmware file and store it in the work directory
+             firmware_data[FirmwareKeys.BIN_FILENAME] = \
+@@ -433,7 +433,7 @@
+                     else:
+                         boot_validation_bytes_array.append(Package.sign_firmware(self.key_file, bin_file_path))
+                 else:
+-                    boot_validation_bytes_array.append('')
++                    boot_validation_bytes_array.append(b'')
+ 
+ 
+             init_packet = InitPacketPB(
+diff -ruN a/nordicsemi/dfu/signing.py b/nordicsemi/dfu/signing.py
+--- a/nordicsemi/dfu/signing.py
++++ b/nordicsemi/dfu/signing.py
+@@ -169,7 +169,7 @@
+         sk_hexlify = binascii.hexlify(self.sk.to_string())
+ 
+         sk_hexlify_list = []
+-        for i in xrange(len(sk_hexlify)-2, -2, -2):
++        for i in range(len(sk_hexlify)-2, -2, -2):
+             sk_hexlify_list.append(sk_hexlify[i:i+2])
+ 
+         sk_hexlify_list_str = ''.join(sk_hexlify_list)
+@@ -189,10 +189,10 @@
+         vk_hexlify = binascii.hexlify(vk.to_string())
+ 
+         vk_hexlify_list = []
+-        for i in xrange(len(vk_hexlify[0:64])-2, -2, -2):
++        for i in range(len(vk_hexlify[0:64])-2, -2, -2):
+             vk_hexlify_list.append(vk_hexlify[i:i+2])
+ 
+-        for i in xrange(len(vk_hexlify)-2, 62, -2):
++        for i in range(len(vk_hexlify)-2, 62, -2):
+             vk_hexlify_list.append(vk_hexlify[i:i+2])
+ 
+         vk_hexlify_list_str = ''.join(vk_hexlify_list)
+@@ -240,12 +240,12 @@
+ 
+         vk_x_separated = ""
+         vk_x_str = vk_hex[0:64]
+-        for i in xrange(0, len(vk_x_str), 2):
++        for i in range(0, len(vk_x_str), 2):
+             vk_x_separated = "0x" + vk_x_str[i:i+2] + ", " + vk_x_separated
+ 
+         vk_y_separated = ""
+         vk_y_str = vk_hex[64:128]
+-        for i in xrange(0, len(vk_y_str), 2):
++        for i in range(0, len(vk_y_str), 2):
+             vk_y_separated = "0x" + vk_y_str[i:i+2] + ", " + vk_y_separated
+         vk_y_separated = vk_y_separated[:-2]
+         
+diff -ruN a/nordicsemi/dfu/util.py b/nordicsemi/dfu/util.py
+--- a/nordicsemi/dfu/util.py
++++ b/nordicsemi/dfu/util.py
+@@ -44,7 +44,7 @@
+ class NordicEnum(Enum):
+   @classmethod
+   def tostring(cls, val):
+-    for k,v in vars(cls).iteritems():
++    for k,v in vars(cls).items():
+         if v==val:
+             return k
+ 
+@@ -66,7 +66,7 @@
+ 
+     while True:
+         print("%s %s" % (question, prompt))
+-        choice = raw_input().lower()
++        choice = input().lower()
+         if choice == '':
+             return default
+         elif choice in valid:
+diff -ruN a/nordicsemi/__main__.py b/nordicsemi/__main__.py
+--- a/nordicsemi/__main__.py
++++ b/nordicsemi/__main__.py
+@@ -146,7 +146,7 @@
+ def pause():
+     while True:
+         try:
+-            raw_input()
++            input()
+         except (KeyboardInterrupt, EOFError):
+             break
+ 
+@@ -783,7 +783,7 @@
+         try:
+             # This will parse any string starting with 0x as base 16.
+             sd_req_list = sd_req.split(',')
+-            sd_req_list = map(int_as_text_to_int, sd_req_list)
++            sd_req_list = list(map(int_as_text_to_int, sd_req_list))
+         except ValueError:
+             raise NordicSemiException("Could not parse value for --sd-req. "
+                                       "Hex values should be prefixed with 0x.")
+@@ -793,7 +793,7 @@
+         try:
+             # This will parse any string starting with 0x as base 16.
+             sd_id_list = sd_id.split(',')
+-            sd_id_list = map(int_as_text_to_int, sd_id_list)
++            sd_id_list = list(map(int_as_text_to_int, sd_id_list))
+ 
+             # Copy all IDs from sd_id_list to sd_req_list, without duplicates.
+             # This ensures that the softdevice update can be repeated in case
+diff -ruN a/nordicsemi/thread/tncp.py b/nordicsemi/thread/tncp.py
+--- a/nordicsemi/thread/tncp.py
++++ b/nordicsemi/thread/tncp.py
+@@ -78,7 +78,7 @@
+ 
+     @staticmethod
+     def _propid_to_str(propid):
+-        for name, value in SPINEL.__dict__.iteritems():
++        for name, value in SPINEL.__dict__.items():
+             if (name.startswith('PROP_') and value == propid):
+                 return name
+ 
+@@ -160,7 +160,7 @@
+         flags = 0
+         prefix_len = 64
+ 
+-        prefix = ipaddress.IPv6Interface(unicode(ipaddr))
++        prefix = ipaddress.IPv6Interface(str(ipaddr))
+         arr = prefix.ip.packed
+         arr += self._wpan.encode_fields('CLLC',
+                                            prefix_len,
+@@ -174,7 +174,7 @@
+     def print_addresses(self):
+         logger.info("NCP Thread IPv6 addresses:")
+         for addr in self._wpan.get_ipaddrs():
+-            logger.info(unicode(addr))
++            logger.info(str(addr))
+ 
+     def send(self, payload, dest):
+         if (dest.addr.is_multicast):
+diff -ruN a/nordicsemi/utility/target_registry.py b/nordicsemi/utility/target_registry.py
+--- a/nordicsemi/utility/target_registry.py
++++ b/nordicsemi/utility/target_registry.py
+@@ -73,7 +73,7 @@
+         if self.targets is None:
+             self.targets = []
+ 
+-            for key, value in os.environ.iteritems():
++            for key, value in os.environ.items():
+                 match = re.match("NORDICSEMI_TARGET_(?P<target>\d+)_(?P<key>[a-zA-Z_]+)", key)
+ 
+                 if match:
