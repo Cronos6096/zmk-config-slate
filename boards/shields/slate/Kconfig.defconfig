@@ -1,14 +1,17 @@
-if SHIELD_SLATE_SINISTRA
+# The dongle is the only split central; both halves are split peripherals.
 
-config ZMK_KEYBOARD_NAME
-    default "Slate"
+if SHIELD_SLATE_DONGLE
 
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
+# The dongle keeps a link to each half
+config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+    default 2
+
 endif
 
-if SHIELD_SLATE_SINISTRA || SHIELD_SLATE_DESTRA
+if SHIELD_SLATE_DONGLE || SHIELD_SLATE_SINISTRA || SHIELD_SLATE_DESTRA
 
 config ZMK_SPLIT
     default y

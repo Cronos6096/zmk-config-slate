@@ -1,0 +1,8 @@
+# The west workspace lives outside this repo (see `make setup`, ZMK_WORKSPACE),
+# these are only here in case one is ever created in place.
+/.west/
+/build/
+/modules/
+/zmk/
+/zephyr/*
+!/zephyr/module.yml

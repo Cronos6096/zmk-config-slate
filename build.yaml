@@ -1,10 +1,18 @@
 include:
   - board: nice_nano_v2
-    shield: slate_sinistra
+    shield: slate_dongle
+    artifact-name: slate-dongle
     snippet: studio-rpc-usb-uart
+    cmake-args: >-
+      -DCONFIG_ZMK_STUDIO=y
+      -DCONFIG_BT_MAX_CONN=5
+      -DCONFIG_BT_MAX_PAIRED=5
+      -DCONFIG_ZMK_SLEEP=n
+
+  - board: nice_nano_v2
+    shield: slate_sinistra
+    artifact-name: slate-left
 
   - board: nice_nano_v2
     shield: slate_destra
-
-  - board: nice_nano_v2
-    shield: settings_reset
+    artifact-name: slate-right
