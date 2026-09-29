@@ -1,0 +1,13 @@
+diff --git a/app/src/split/bluetooth/peripheral.c b/app/src/split/bluetooth/peripheral.c
+index 5a12e0fc..52b4a017 100644
+--- a/app/src/split/bluetooth/peripheral.c
++++ b/app/src/split/bluetooth/peripheral.c
+@@ -117,6 +117,9 @@ static void security_changed(struct bt_conn *conn, bt_security_t level, enum bt_
+         LOG_DBG("Security changed: %s level %u", addr, level);
+     } else {
+         LOG_ERR("Security failed: %s level %u err %d", addr, level, err);
++        LOG_WRN("Unpairing %s so it can re-pair from scratch", addr);
++        bt_unpair(BT_ID_DEFAULT, bt_conn_get_dst(conn));
++        bt_conn_disconnect(conn, BT_HCI_ERR_AUTH_FAIL);
+     }
+ }
